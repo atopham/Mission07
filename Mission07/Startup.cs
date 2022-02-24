@@ -15,12 +15,12 @@ namespace Mission07
 {
     public class Startup
     {
+        public IConfiguration Configuration { get; }
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
         }
 
-        public IConfiguration Configuration { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
@@ -28,9 +28,12 @@ namespace Mission07
             services.AddControllersWithViews();
             services.AddDbContext<BookContext>(options =>
             {
-                options.UseSqlite(Configuration["ConnectionStrings:BookDBConnection"]);
+                //options.UseSqlite(Configuration["ConnectionStrings:BookDBConnection"]);
+                options.UseSqlite(Configuration.GetConnectionString("BookDBConnection"));
             });
             services.AddScoped<IBookRepository, EFBookRepository>();
+            services.AddRazorPages();
+            services.AddSession();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -39,26 +42,33 @@ namespace Mission07
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
-                
-            }
-            else
-            {
-                app.UseExceptionHandler("/Home/Error");
-                // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
-                app.UseHsts();
             }
             app.UseHttpsRedirection();
             app.UseStaticFiles();
-
+            app.UseSession();
             app.UseRouting();
 
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapControllerRoute(
-                    name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
+                // by default, the endpoint is in order name, pattern, default
+                endpoints.MapControllerRoute("categorypage",
+                    // naming "Category" in HomeController and in Default
+                     "{category}/Page{pageNum}",
+                     new { Controller = "Home", action = "Index" });
+
+                // endpoints are run in order. The first endpoint here is the one that doesn't explicitly say "pageNum" in the URL
+                endpoints.MapControllerRoute(name: "Paging", pattern: "{pageNum}", defaults: new { Controller = "Home", action = "Index", pageNum = 1 });
+
+                endpoints.MapControllerRoute("category",
+                    "{category}",
+                    new { Controller = "Home", action = "Index", pageNum = 1 });
+
+                endpoints.MapDefaultControllerRoute();
+                endpoints.MapRazorPages();
+
+
             });
         }
     }
