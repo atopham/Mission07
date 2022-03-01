@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Mvc.ModelBinding;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
@@ -13,6 +14,8 @@ namespace Mission07.Models
         [Key]
         [Required]
         public int BookId { get; set; }
+
+
         [Required]
         public string Title { get; set; }
         [Required]

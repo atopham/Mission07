@@ -5,10 +5,9 @@ using System.Threading.Tasks;
 
 namespace Mission07.Models
 {
-    public interface IBookRepository
+    public interface IPurchaseRepository
     {
-        IQueryable<Book>Books { get; }
-
+        IQueryable<Purchase> Purchases { get; }
         void SavePurchase(Purchase purchase);
     }
 }

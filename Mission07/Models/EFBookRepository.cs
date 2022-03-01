@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -13,5 +14,10 @@ namespace Mission07.Models
             context = temp;
         }
         public IQueryable<Book> Books => context.Books;
+
+        public void SavePurchase(Purchase purchase)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
