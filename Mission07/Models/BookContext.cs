@@ -16,6 +16,8 @@ namespace Mission07.Models
 
         public BookContext(DbContextOptions<BookContext>options):base (options)
         {
+            // someting I added to try and get context.saveChanges(); in EFPurchaseRepository to work
+            Database.EnsureCreated();
 
         }
 

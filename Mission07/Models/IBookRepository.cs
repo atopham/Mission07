@@ -9,6 +9,5 @@ namespace Mission07.Models
     {
         IQueryable<Book>Books { get; }
 
-        void SavePurchase(Purchase purchase);
     }
 }

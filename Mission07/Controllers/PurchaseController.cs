@@ -9,10 +9,10 @@ namespace Mission07.Controllers
 {
     public class PurchaseController : Controller
     {
-        private IBookRepository repo { get; set; }
+        private IPurchaseRepository repo { get; set; }
         private Cart cart { get; set; }
 
-        public PurchaseController(IBookRepository temp, Cart c)
+        public PurchaseController(IPurchaseRepository temp, Cart c)
         {
             repo = temp;
             cart = c;

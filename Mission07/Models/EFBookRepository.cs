@@ -15,9 +15,5 @@ namespace Mission07.Models
         }
         public IQueryable<Book> Books => context.Books;
 
-        public void SavePurchase(Purchase purchase)
-        {
-            throw new NotImplementedException();
-        }
     }
 }
