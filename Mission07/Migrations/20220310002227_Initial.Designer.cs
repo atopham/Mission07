@@ -9,7 +9,7 @@ using Mission07.Models;
 namespace Mission07.Migrations
 {
     [DbContext(typeof(BookContext))]
-    [Migration("20220302021500_Initial")]
+    [Migration("20220310002227_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -116,6 +116,9 @@ namespace Mission07.Migrations
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("TEXT");
+
+                    b.Property<bool>("PurchaseShipped")
+                        .HasColumnType("INTEGER");
 
                     b.Property<string>("State")
                         .IsRequired()

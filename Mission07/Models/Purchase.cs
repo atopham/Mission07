@@ -30,5 +30,7 @@ namespace Mission07.Models
         [Required(ErrorMessage = "Please enter a country")]
         public string Country { get; set; }
         public bool Anonymous { get; set; }
+        [BindNever]
+        public bool PurchaseShipped { get; set; }
     }
 }
